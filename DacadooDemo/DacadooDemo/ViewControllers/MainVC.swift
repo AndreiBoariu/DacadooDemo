@@ -87,7 +87,6 @@ class MainVC: UIViewController {
     }
 
     @objc func searchButtonTappedFromKeyboard() {
-        // Call the same action as the main search button when the search button on the keyboard is tapped
         searchButtonTapped(btnSearch)
     }
 
@@ -101,6 +100,17 @@ class MainVC: UIViewController {
                 do {
                     let result = try JSONDecoder().decode(UnsplashResult.self, from: data)
 
+                    // Check if result is empty
+                    if result.results.isEmpty {
+                        DispatchQueue.main.async {
+                            self.showAlert(with: "No Results", message: "Why did the math book look sad? \n\nBecause it had too many problems. 🤕")
+                            self.stopLoadingUI()
+                        }
+                        
+                        return
+                    }
+
+                    // Set array of ImageData objects
                     self.images = result.results.compactMap { result in
                         guard let thumbURL = URL(string: result.urls.thumb),
                               let fullURL = URL(string: result.urls.full) else {
