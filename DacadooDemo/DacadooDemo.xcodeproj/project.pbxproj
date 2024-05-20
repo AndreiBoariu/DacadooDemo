@@ -20,6 +20,8 @@
 		88F999F52BFB81D200ED5AE7 /* UnsplashResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F999F42BFB81D200ED5AE7 /* UnsplashResult.swift */; };
 		88F999F92BFB833600ED5AE7 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F999F82BFB833600ED5AE7 /* ImageCell.swift */; };
 		88F999FB2BFBA63700ED5AE7 /* ImageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F999FA2BFBA63700ED5AE7 /* ImageData.swift */; };
+		88F999FD2BFBBCD700ED5AE7 /* ImageDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F999FC2BFBBCD700ED5AE7 /* ImageDataTests.swift */; };
+		88F999FF2BFBBE0600ED5AE7 /* MainVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F999FE2BFBBE0600ED5AE7 /* MainVCTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +59,8 @@
 		88F999F42BFB81D200ED5AE7 /* UnsplashResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashResult.swift; sourceTree = "<group>"; };
 		88F999F82BFB833600ED5AE7 /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		88F999FA2BFBA63700ED5AE7 /* ImageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageData.swift; sourceTree = "<group>"; };
+		88F999FC2BFBBCD700ED5AE7 /* ImageDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDataTests.swift; sourceTree = "<group>"; };
+		88F999FE2BFBBE0600ED5AE7 /* MainVCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVCTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +127,8 @@
 			isa = PBXGroup;
 			children = (
 				88F999D82BFB5FE200ED5AE7 /* DacadooDemoTests.swift */,
+				88F999FC2BFBBCD700ED5AE7 /* ImageDataTests.swift */,
+				88F999FE2BFBBE0600ED5AE7 /* MainVCTests.swift */,
 			);
 			path = DacadooDemoTests;
 			sourceTree = "<group>";
@@ -309,6 +315,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				88F999D92BFB5FE200ED5AE7 /* DacadooDemoTests.swift in Sources */,
+				88F999FD2BFBBCD700ED5AE7 /* ImageDataTests.swift in Sources */,
+				88F999FF2BFBBE0600ED5AE7 /* MainVCTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
