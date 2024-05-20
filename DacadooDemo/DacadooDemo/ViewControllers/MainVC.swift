@@ -20,6 +20,7 @@ class MainVC: UIViewController {
         super.viewDidLoad()
 
         setupUI()
+        setupAccessibility()
     }
 
     // MARK: - Custom Methods
@@ -31,6 +32,20 @@ class MainVC: UIViewController {
 
         // Add a target to the text field for the search button on the keyboard
         txfSearch.addTarget(self, action: #selector(searchButtonTappedFromKeyboard), for: .editingDidEndOnExit)
+    }
+
+    private func setupAccessibility() {
+        txfSearch.accessibilityLabel = "Search Text Field"
+        txfSearch.accessibilityHint = "Enter a search term here"
+
+        btnSearch.accessibilityLabel = "Search Button"
+        btnSearch.accessibilityHint = "Tap to search for images"
+
+        activityIndicator.accessibilityLabel = "Loading Indicator"
+        activityIndicator.accessibilityHint = "Indicates that content is loading"
+
+        tableView.accessibilityLabel = "Image Results"
+        tableView.accessibilityHint = "Displays search results as a list of images"
     }
 
     private func dismissKeyboard() {
@@ -57,6 +72,10 @@ class MainVC: UIViewController {
         }
 
         dismissKeyboard()
+
+        // Add haptic feedback
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
 
         // Show the activity indicator and hide the search button
         activityIndicator.isHidden = false
@@ -126,6 +145,10 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+
+        // Add haptic feedback
+        let generator = UISelectionFeedbackGenerator()
+        generator.selectionChanged()
 
         let selectedImage = images[indexPath.row]
         let detailVC = storyboard?.instantiateViewController(withIdentifier: "FullScreenImageVC") as! FullScreenImageVC

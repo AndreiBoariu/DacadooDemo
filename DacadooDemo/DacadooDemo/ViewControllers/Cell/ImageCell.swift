@@ -31,6 +31,10 @@ class ImageCell: UITableViewCell {
             }
         }
         task.resume()
+
+        // Accessibility
+        imgView.accessibilityLabel = "Image"
+        imgView.accessibilityHint = "Double-tap to view the image in full screen"
     }
 
     private func resizeImage(image: UIImage?, targetWidth: CGFloat) -> UIImage? {
