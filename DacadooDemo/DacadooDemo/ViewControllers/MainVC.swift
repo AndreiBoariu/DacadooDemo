@@ -13,14 +13,15 @@ class MainVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
-    var images: [ImageData] = []
+    var viewModel = MainViewModel()
 
-    // MARK: - View Lifecyle Methods
+    // MARK: - View Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupUI()
         setupAccessibility()
+        bindViewModel()
     }
 
     // MARK: - Custom Methods
@@ -48,6 +49,27 @@ class MainVC: UIViewController {
         tableView.accessibilityHint = "Displays search results as a list of images"
     }
 
+    private func bindViewModel() {
+        viewModel.onLoadingStatusChanged = { [weak self] isLoading in
+            guard let self = self else { return }
+            self.activityIndicator.isHidden = !isLoading
+            self.btnSearch.isHidden = isLoading
+            if isLoading {
+                self.activityIndicator.startAnimating()
+            } else {
+                self.activityIndicator.stopAnimating()
+            }
+        }
+
+        viewModel.onImagesChanged = { [weak self] in
+            self?.tableView.reloadData()
+        }
+
+        viewModel.onErrorOccurred = { [weak self] errorMessage in
+            self?.showAlert(with: "Error", message: errorMessage)
+        }
+    }
+
     func dismissKeyboard() {
         view.endEditing(true)
     }
@@ -56,12 +78,6 @@ class MainVC: UIViewController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
-    }
-
-    private func stopLoadingUI() {
-        activityIndicator.stopAnimating()
-        activityIndicator.isHidden = true
-        btnSearch.isHidden = false
     }
 
     // MARK: - Action Methods
@@ -77,78 +93,23 @@ class MainVC: UIViewController {
         let generator = UIImpactFeedbackGenerator(style: .medium)
         generator.impactOccurred()
 
-        // Show the activity indicator and hide the search button
-        activityIndicator.isHidden = false
-        activityIndicator.startAnimating()
-        btnSearch.isHidden = true
-
-        // Call API
-        fetchImages(for: query)
+        viewModel.fetchImages(for: query)
     }
 
     @objc func searchButtonTappedFromKeyboard() {
         searchButtonTapped(btnSearch)
-    }
-
-    // MARK: - API Methods
-    func fetchImages(for query: String) {
-        let urlString = "https://api.unsplash.com/search/photos?query=\(query)&client_id=NHr5nmnvy4fJA0AtfpReQm_EI2SBnnvPajDObRtmYbY"
-        guard let url = URL(string: urlString) else { return }
-
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            if let data = data {
-                do {
-                    let result = try JSONDecoder().decode(UnsplashResult.self, from: data)
-
-                    // Check if result is empty
-                    if result.results.isEmpty {
-                        DispatchQueue.main.async {
-                            self.showAlert(with: "No Results", message: "Why did the math book look sad? \n\nBecause it had too many problems. 🤕")
-                            self.stopLoadingUI()
-                        }
-                        
-                        return
-                    }
-
-                    // Set array of ImageData objects
-                    self.images = result.results.compactMap { result in
-                        guard let thumbURL = URL(string: result.urls.thumb),
-                              let fullURL = URL(string: result.urls.full) else {
-                            return nil
-                        }
-
-                        return ImageData(thumbURL: thumbURL, fullURL: fullURL)
-                    }
-
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                        self.stopLoadingUI()
-                    }
-                } catch {
-                    DispatchQueue.main.async {
-                        self.showAlert(with: "Failed to decode JSON", message: error.localizedDescription)
-                        self.stopLoadingUI()
-                    }
-                }
-            } else if let error = error {
-                DispatchQueue.main.async {
-                    self.showAlert(with: "Error", message: error.localizedDescription)
-                    self.stopLoadingUI()
-                }
-            }
-        }.resume()
     }
 }
 
 // MARK: - UITableViewDelegate Methods
 extension MainVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return images.count
+        return viewModel.images.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ImageCell.cellId, for: indexPath) as! ImageCell
-        let imageData = images[indexPath.row]
+        let imageData = viewModel.images[indexPath.row]
         cell.loadImage(imageData)
         return cell
     }
@@ -160,7 +121,7 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
         let generator = UISelectionFeedbackGenerator()
         generator.selectionChanged()
 
-        let selectedImage = images[indexPath.row]
+        let selectedImage = viewModel.images[indexPath.row]
         let detailVC = storyboard?.instantiateViewController(withIdentifier: "FullScreenImageVC") as! FullScreenImageVC
         detailVC.imageURL = selectedImage.fullURL
         navigationController?.pushViewController(detailVC, animated: true)
@@ -170,3 +131,4 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
         return 170.0
     }
 }
+

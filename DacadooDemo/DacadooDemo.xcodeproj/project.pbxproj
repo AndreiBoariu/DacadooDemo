@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8822DBC52C2BF7B40028CD5B /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8822DBC42C2BF7B40028CD5B /* MainViewModel.swift */; };
+		8822DBC62C2BF7B40028CD5B /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8822DBC42C2BF7B40028CD5B /* MainViewModel.swift */; };
+		8822DBC72C2BF7B40028CD5B /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8822DBC42C2BF7B40028CD5B /* MainViewModel.swift */; };
 		88F999C22BFB5FDE00ED5AE7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F999C12BFB5FDE00ED5AE7 /* AppDelegate.swift */; };
 		88F999C42BFB5FDE00ED5AE7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F999C32BFB5FDE00ED5AE7 /* SceneDelegate.swift */; };
 		88F999C62BFB5FDE00ED5AE7 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F999C52BFB5FDE00ED5AE7 /* MainVC.swift */; };
@@ -42,6 +45,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8822DBC42C2BF7B40028CD5B /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		88F999BE2BFB5FDE00ED5AE7 /* DacadooDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DacadooDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88F999C12BFB5FDE00ED5AE7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		88F999C32BFB5FDE00ED5AE7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -88,6 +92,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8822DBC32C2BF7830028CD5B /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				8822DBC42C2BF7B40028CD5B /* MainViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		88F999B52BFB5FDE00ED5AE7 = {
 			isa = PBXGroup;
 			children = (
@@ -113,6 +125,7 @@
 			children = (
 				88F999C12BFB5FDE00ED5AE7 /* AppDelegate.swift */,
 				88F999C32BFB5FDE00ED5AE7 /* SceneDelegate.swift */,
+				8822DBC32C2BF7830028CD5B /* ViewModels */,
 				88F999F62BFB81FF00ED5AE7 /* ViewControllers */,
 				88F999F32BFB816E00ED5AE7 /* Model */,
 				88F999C72BFB5FDE00ED5AE7 /* Main.storyboard */,
@@ -307,6 +320,7 @@
 				88F999C42BFB5FDE00ED5AE7 /* SceneDelegate.swift in Sources */,
 				88F999F92BFB833600ED5AE7 /* ImageCell.swift in Sources */,
 				88F999FB2BFBA63700ED5AE7 /* ImageData.swift in Sources */,
+				8822DBC52C2BF7B40028CD5B /* MainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -317,6 +331,7 @@
 				88F999D92BFB5FE200ED5AE7 /* DacadooDemoTests.swift in Sources */,
 				88F999FD2BFBBCD700ED5AE7 /* ImageDataTests.swift in Sources */,
 				88F999FF2BFBBE0600ED5AE7 /* MainVCTests.swift in Sources */,
+				8822DBC62C2BF7B40028CD5B /* MainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -326,6 +341,7 @@
 			files = (
 				88F999E32BFB5FE200ED5AE7 /* DacadooDemoUITests.swift in Sources */,
 				88F999E52BFB5FE200ED5AE7 /* DacadooDemoUITestsLaunchTests.swift in Sources */,
+				8822DBC72C2BF7B40028CD5B /* MainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
